@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Sensor : MonoBehaviour
 {
-    List<int> castAngles = new List<int> { -15 , -13, -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13, 15 };
+    //List<int> castAngles = new List<int> { -15 , -13, -11, -9, -7, -5, -3, -1, 1, 3, 5, 7, 9, 11, 13, 15 };
     float resolution = 0.4f;
     string path = Application.dataPath + "/pcd/";
     string fileName = "PointCloudData";
@@ -27,11 +27,11 @@ public class Sensor : MonoBehaviour
         StreamWriter sw = new StreamWriter(dataFile);
         for (float angle = 0f; angle < 360f; angle += resolution)
         {   
-            for (int laserChannel = 0; laserChannel <= 15; laserChannel++)
+            for (int laserCastAngle = -30; laserCastAngle <= 30; laserCastAngle++)
             {
-                var laserPolarAngle = castAngles[laserChannel] * Mathf.Deg2Rad;
+                //var laserPolarAngle = castAngles[laserChannel] * Mathf.Deg2Rad;
                 
-                Vector3 rayDirection = calcDirection(angle * Mathf.Deg2Rad, laserPolarAngle * Mathf.Deg2Rad);
+                Vector3 rayDirection = calcDirection(angle * Mathf.Deg2Rad, laserCastAngle * Mathf.Deg2Rad);
                 if (Physics.Raycast(transform.position, rayDirection, out RaycastHit hit))
                 {
                     Debug.Log(hit.point);
